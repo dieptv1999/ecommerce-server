@@ -9,7 +9,7 @@ import { REDIS } from './redis.constants';
       provide: REDIS,
       useFactory: async () => {
         const client = Redis.createClient({
-          url: 'redis://dieptv:dieptv1999@localhost:6379',
+          url: 'redis://localhost:6379',
           legacyMode: true,
         });
         await client.connect();

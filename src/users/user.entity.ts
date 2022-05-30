@@ -2,9 +2,10 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Role } from '../role/role.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
@@ -51,8 +52,9 @@ export class User {
   @Column({ default: false })
   isActive: boolean;
 
-  @Field((type) => [Role], { nullable: true })
-  @OneToMany((type) => Role, (role) => role.id)
+  @Field((id) => [Role], { nullable: true })
+  @ManyToMany(() => Role, { nullable: true })
+  @JoinTable()
   roles: Role[];
 
   @Field()

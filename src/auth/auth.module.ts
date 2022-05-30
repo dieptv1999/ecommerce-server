@@ -8,6 +8,7 @@ import { AuthSerializer } from './serialization.provider';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from '../common/utils/constant';
 import { JwtStrategy } from './jwt.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { JwtStrategy } from './jwt.strategy';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
     }),
+    ConfigModule,
   ],
   providers: [AuthService, LocalStrategy, AuthSerializer, JwtStrategy],
   controllers: [AuthController],

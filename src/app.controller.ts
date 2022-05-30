@@ -1,8 +1,15 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 
 import { AppService } from './app.service';
-import { LoggedInGuard } from './logged-in.guard';
-import { AdminGuard } from './auth/admin.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { SharpPipe } from './sharp.pipe';
 
 @Controller()
 export class AppController {
@@ -13,15 +20,9 @@ export class AppController {
     return this.appService.getPublicMessage();
   }
 
-  @UseGuards(LoggedInGuard)
-  @Get('protected')
-  guardedRoute() {
-    return this.appService.getPrivateMessage();
-  }
-
-  @UseGuards(AdminGuard)
-  @Get('admin')
-  getAdminMessage() {
-    return this.appService.getAdminMessage();
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('files'))
+  uploadImage(@UploadedFile(SharpPipe) image: string) {
+    console.log(image, 'image');
   }
 }

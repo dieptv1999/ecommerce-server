@@ -16,9 +16,16 @@ import { UsersModule } from './users/users.module';
 import { RedisModule } from './redis/redis.module';
 import { REDIS } from './redis/redis.constants';
 import { RoleModule } from './role/role.module';
+import { PermissionModule } from './permission/permission.module';
+import { ProductModule } from './product/product.module';
+import { SkuService } from './sku/sku.service';
+import { SkuController } from './sku/sku.controller';
+import { SkuModule } from './sku/sku.module';
 import * as RedisStore from 'connect-redis';
 import * as passport from 'passport';
 import * as session from 'express-session';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 
 @Module({
   imports: [
@@ -36,9 +43,15 @@ import * as session from 'express-session';
     UsersModule,
     RedisModule,
     RoleModule,
+    PermissionModule,
+    ProductModule,
+    SkuModule,
+    MulterModule.register({
+      storage: memoryStorage(),
+    }),
   ],
-  controllers: [AppController],
-  providers: [AppService, Logger],
+  controllers: [AppController, SkuController],
+  providers: [AppService, Logger, SkuService],
 })
 export class AppModule implements NestModule {
   constructor(@Inject(REDIS) private readonly redis) {}

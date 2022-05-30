@@ -3,15 +3,32 @@ import { UsersService } from '../users/users.service';
 import { RegisterUserDto } from './register-user.dto';
 import { User } from '../users/user.entity';
 import { compare, hash } from 'bcrypt';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { LoginUserDto } from './login-user.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
+    private usersService: UsersService,
+  ) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
-    const user = await this.usersService.findByUsername(username);
-    console.log(pass, await hash(pass, 12), compare(pass, user.password));
-    if (user && compare(pass, user.password)) {
+  async createToken(user: Omit<User, 'password'>) {
+    return {
+      expiresIn: this.configService.get('JWT_EXPIRATION_TIME'),
+      accessToken: this.jwtService.sign({ id: user.id }),
+      user,
+    };
+  }
+
+  async validateUser({
+    username,
+    password,
+  }: LoginUserDto): Promise<Omit<User, 'password'>> {
+    const user = await this.usersService.findByUsernameOrEmail(username);
+    if (user && compare(password, user.password)) {
       const { password, ...result } = user;
       return result;
     }

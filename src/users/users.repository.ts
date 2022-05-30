@@ -4,7 +4,7 @@ import { RegisterUserDto } from '../auth/register-user.dto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  createUser(createMovieDto: RegisterUserDto): Promise<User> {
+  createUser(createUserDto: RegisterUserDto): Promise<User> {
     const user = this.create();
 
     const {
@@ -16,7 +16,7 @@ export class UserRepository extends Repository<User> {
       address,
       phone,
       confirmationPassword,
-    } = createMovieDto;
+    } = createUserDto;
 
     user.password = password;
     user.email = email;

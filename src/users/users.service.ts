@@ -16,7 +16,10 @@ export class UsersService {
   }
 
   findOne(id: number): Promise<User> {
-    return this.usersRepository.findOne({ where: { id: id } });
+    return this.usersRepository.findOne({
+      where: { id: id },
+      relations: ['roles'],
+    });
   }
 
   findByUsername(username: string): Promise<User> {
@@ -25,6 +28,12 @@ export class UsersService {
 
   findByEmail(email: string): Promise<User> {
     return this.usersRepository.findOne({ where: { email: email } });
+  }
+
+  findByUsernameOrEmail(input: string): Promise<User> {
+    return this.usersRepository.findOne({
+      where: [{ username: input }, { email: input }],
+    });
   }
 
   async remove(id: string): Promise<void> {

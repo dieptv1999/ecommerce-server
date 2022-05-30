@@ -1,8 +1,10 @@
-import _ from 'lodash';
+import { isEmpty, find } from 'lodash';
 import constant from './constant';
+import { Role } from '../../role/role.entity';
 
-function isAdmin(roles: number[]) {
-  if (_.find(roles, (r) => r === constant.ROLES.ADMIN)) {
+function isAdmin(roles: Role[]) {
+  console.log(roles, 'roles');
+  if (!isEmpty(roles) && find(roles, (r) => r.id === constant.ROLES.ADMIN)) {
     return true;
   } else return false;
 }
