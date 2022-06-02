@@ -26,6 +26,9 @@ import * as passport from 'passport';
 import * as session from 'express-session';
 import { MulterModule } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
+import { HomepageModule } from './homepage/homepage.module';
+import { ParcelModule } from './parcel/parcel.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -46,9 +49,12 @@ import { memoryStorage } from 'multer';
     PermissionModule,
     ProductModule,
     SkuModule,
+    HomepageModule,
     MulterModule.register({
       storage: memoryStorage(),
     }),
+    ParcelModule,
+    OrderModule,
   ],
   controllers: [AppController, SkuController],
   providers: [AppService, Logger, SkuService],

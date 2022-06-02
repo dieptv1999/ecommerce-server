@@ -1,8 +1,17 @@
-import { Body, Controller, Get, Param, Post, Put, Req, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ProductService } from './product.service';
-import { ProductCreateDto } from './product-create-dto';
+import { ProductCreateDto } from './product-create.dto';
 
 @ApiBearerAuth()
 @Controller('product')
@@ -18,6 +27,12 @@ export class ProductController {
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   get(@Param() params) {
+    return this.productService.findOne(params?.id);
+  }
+
+  @Get('')
+  @UseGuards(JwtAuthGuard)
+  list(@Param() params) {
     return this.productService.findOne(params?.id);
   }
 

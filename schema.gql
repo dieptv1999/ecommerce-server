@@ -40,13 +40,24 @@ type User {
   updated_at: DateTime!
 }
 
+type Trademark {
+  id: Float!
+  name: String!
+  description: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
 type Product {
   id: Float!
   name: String!
   rate: Float!
   origin: String!
-  trademark: String!
+  trademarkId: Float!
+  trademark: Trademark!
   description: String!
+  type: String!
+  feature: String!
   status: String!
   created_at: DateTime!
   updated_at: DateTime!

@@ -8,9 +8,19 @@ import {
   Index,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Product } from '../product/product.entity';
+import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  IsArray,
+  IsBoolean,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Parcel } from '../parcel/parcel.entity';
 
 @ObjectType()
 @Entity()
@@ -37,9 +47,17 @@ export class Sku {
   color: string;
 
   @Field()
+  @Column({ type: 'number', nullable: true })
+  productId: number;
+
+  @Field()
   @ManyToOne((type) => Product)
-  @JoinColumn({ name: 'product_id' })
+  @JoinColumn({ name: 'productId' })
   product: Product;
+
+  @Field()
+  @Column({ nullable: true, default: 0 })
+  discount: number;
 
   @Field()
   @Column({ nullable: true })
@@ -48,6 +66,38 @@ export class Sku {
   @Field()
   @Column({ nullable: false, default: 12 })
   insurance: number;
+
+  @Field()
+  @Column({ nullable: true, default: false })
+  @IsBoolean()
+  important: boolean;
+
+  @Field()
+  @Column({ default: 0 })
+  amount: number;
+
+  @Field()
+  @Column({ default: false })
+  available: boolean;
+
+  @Field((type) => [String])
+  @Column('simple-array', { nullable: true })
+  @IsArray({ always: true })
+  @ValidateNested({ each: true })
+  @ArrayMinSize(2)
+  @ArrayMaxSize(10)
+  images: string[];
+
+  @Field()
+  @IsString()
+  @Column({ default: '1x1' })
+  size: string;
+
+  @Field((id) => [Parcel])
+  @OneToMany((type) => Parcel, (parcel) => parcel.order)
+  parcels: Parcel[];
+
+  bought: number;
 
   @Field()
   @CreateDateColumn()

@@ -10,13 +10,13 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ProductCreateDto {
+export class OrderDto {
   @IsNotEmpty()
   @MinLength(4)
   @MaxLength(50)
   @ApiProperty()
   @IsString()
-  name: string;
+  action: string;
 
   @ApiProperty()
   @IsString()

@@ -6,9 +6,12 @@ import {
   UpdateDateColumn,
   Generated,
   Index,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ProductStatus } from './product.constant';
+import { Trademark } from '../trademark/trademark.entity';
 
 @ObjectType()
 @Entity()
@@ -27,7 +30,7 @@ export class Product {
   name: string;
 
   @Field()
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: 1 })
   rate: number;
 
   @Field()
@@ -35,12 +38,25 @@ export class Product {
   origin: string;
 
   @Field()
-  @Column({})
-  trademark: string;
+  @Column({ nullable: true })
+  trademarkId: number;
+
+  @Field()
+  @ManyToOne((type) => Trademark)
+  @JoinColumn({ name: 'trademarkId' })
+  trademark: Trademark;
 
   @Field()
   @Column({ nullable: true })
   description: string;
+
+  @Field()
+  @Column({ nullable: true })
+  type: string;
+
+  @Field()
+  @Column({ nullable: true })
+  feature: string;
 
   @Field()
   @Column({

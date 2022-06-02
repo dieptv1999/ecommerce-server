@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { PermissionService } from './permission.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AdminGuard } from '../auth/admin.guard';
-import { PermissionDto } from './permission-dto';
+import { PermissionDto } from './permission.dto';
 
 @ApiBearerAuth()
 @Controller('permission')
