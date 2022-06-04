@@ -4,7 +4,10 @@ import { Logger } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 
-const whitelist = ['http://localhost:3000', 'https://ecommerce-fe-inky.vercel.app'];
+const whitelist = [
+  'http://localhost:3000',
+  'https://ecommerce-fe-inky.vercel.app',
+];
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

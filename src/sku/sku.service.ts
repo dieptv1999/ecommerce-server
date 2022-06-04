@@ -34,7 +34,7 @@ export class SkuService {
   async listByIds(ids: number[]): Promise<[Sku[], number]> {
     return this.skuRepository.findAndCount({
       where: {
-        id: In(ids),
+        id: In(ids || []),
       },
       relations: ['product'],
     });
