@@ -42,7 +42,7 @@ export class ParcelController {
     if (skuExist) {
       res.cookie(
         constant.CART_QUANTITY,
-        (parseInt(req.cookies[constant.CART_QUANTITY], 10) || 0) + body.amount,
+        (parseInt(req.cookies[constant.CART_QUANTITY] || '0', 10) || 0) + body.amount,
       );
       const recent_products = JSON.parse(
         req.cookies[constant.RECENT_PRODUCTS] || '[]',
