@@ -29,23 +29,23 @@ export class User {
   password: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   firstName: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   address: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   phone: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   confirmationPassword: string;
 
   @Field()
