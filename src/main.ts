@@ -6,6 +6,7 @@ import * as cookieParser from 'cookie-parser';
 
 const whitelist = [
   'http://localhost:3000',
+  'http://localhost:3001',
   'https://ecommerce-fe-inky.vercel.app',
 ];
 

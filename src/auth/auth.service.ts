@@ -40,7 +40,7 @@ export class AuthService {
     if (existingUser) {
       throw new BadRequestException('User remail must be unique');
     }
-    if (user.password !== user.confirmationPassword) {
+    if (user.password !== user.passwordConfirm) {
       throw new BadRequestException(
         'Password and Confirmation Password must match',
       );
