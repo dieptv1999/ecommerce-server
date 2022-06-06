@@ -46,11 +46,23 @@ export class User {
 
   @Field()
   @Column({ nullable: true })
+  avatar: string;
+
+  @Field()
+  @Column({ nullable: true })
+  background: string;
+
+  @Field()
+  @Column({ nullable: true })
   confirmationPassword: string;
 
   @Field()
   @Column({ default: false })
   isActive: boolean;
+
+  @Field()
+  @Column({ default: false })
+  blocked: boolean;
 
   @Field((id) => [Role], { nullable: true })
   @ManyToMany(() => Role, { nullable: true })

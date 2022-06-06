@@ -34,8 +34,11 @@ type User {
   lastName: String!
   address: String!
   phone: String!
+  avatar: String!
+  background: String!
   confirmationPassword: String!
   isActive: Boolean!
+  blocked: Boolean!
   roles: [Role!]
   created_at: DateTime!
   updated_at: DateTime!

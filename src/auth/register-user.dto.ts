@@ -61,4 +61,14 @@ export class RegisterUserDto {
   @ApiProperty()
   @IsEmpty()
   confirmationPassword: string;
+
+  @ApiProperty()
+  @IsEmpty()
+  @IsString()
+  avatar: string;
+
+  @ApiProperty()
+  @IsEmpty()
+  @IsString()
+  background: string;
 }
