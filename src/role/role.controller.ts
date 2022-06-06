@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Req, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RoleService } from './role.service';
 import { RoleDto } from './role.dto';
@@ -15,5 +15,11 @@ export class RoleController {
   @UseGuards(JwtAuthGuard, AdminGuard)
   async createRole(@Req() req, @Body() payload: RoleDto) {
     return await this.roleService.createRole(payload);
+  }
+
+  @Post('add-permission')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  async addPermission(@Body() body: { permissionId: number; id: number }) {
+    return await this.roleService.addPermission(body.id, body.permissionId);
   }
 }

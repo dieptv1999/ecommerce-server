@@ -30,7 +30,7 @@ export class Role {
   type: string;
 
   @Field((id) => [Permission], { nullable: true })
-  @ManyToMany(() => Permission, (permission) => permission.id, {
+  @ManyToMany(() => Permission, (permission) => permission.roles, {
     nullable: true,
   })
   @JoinTable()

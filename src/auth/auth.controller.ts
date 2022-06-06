@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { RegisterUserDto } from './register-user.dto';
 import { LoginUserDto } from './login-user.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { User } from '../users/user.entity';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -15,9 +16,11 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'Successful Registration' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async registerUser(@Body() payload: RegisterUserDto) {
+  async registerUser(
+    @Body() payload: RegisterUserDto,
+  ): Promise<Omit<User, 'password'>> {
     const user = await this.authService.registerUser(payload);
-    return await this.authService.createToken(user);
+    return user;
   }
 
   @UseGuards(LocalGuard)

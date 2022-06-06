@@ -14,4 +14,20 @@ export class PermissionService {
   async createPermission(permission: PermissionDto): Promise<Permission> {
     return this.permissionRepository.save(permission);
   }
+
+  async getPermissionOfRole(ids: number[]): Promise<[Permission[], number]> {
+    try {
+      return await this.permissionRepository
+        .createQueryBuilder('permission')
+        .innerJoin(
+          'permission.roles',
+          'rPer',
+          `rPer.id IN (${Array.isArray(ids) ? ids.join(',') : ids})`,
+        )
+        .getManyAndCount();
+    } catch (e) {
+      console.log(e);
+      return [[], 0];
+    }
+  }
 }

@@ -33,6 +33,7 @@ export class UsersService {
   findByUsernameOrEmail(input: string): Promise<User> {
     return this.usersRepository.findOne({
       where: [{ username: input }, { email: input }],
+      relations: ['roles'],
     });
   }
 

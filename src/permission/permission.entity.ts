@@ -4,8 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Role } from '../role/role.entity';
 
 @ObjectType()
 @Entity()
@@ -21,6 +24,12 @@ export class Permission {
   @Field()
   @Column({ nullable: true })
   description: string;
+
+  @Field((id) => [Role], { nullable: true })
+  @ManyToMany(() => Role, (role) => role.permission, {
+    nullable: true,
+  })
+  roles: Role[];
 
   @Field()
   @CreateDateColumn()

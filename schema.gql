@@ -6,6 +6,7 @@ type Permission {
   id: Float!
   action: String!
   description: String!
+  roles: [Role!]
   created_at: DateTime!
   updated_at: DateTime!
 }
