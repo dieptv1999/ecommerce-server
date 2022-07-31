@@ -9,7 +9,7 @@ const whitelist = [
   'http://localhost:3001',
   'http://localhost:5000',
   'https://ecommerce-fe-inky.vercel.app',
-  'http://ec2-54-179-63-242.ap-southeast-1.compute.amazonaws.com/',
+  'http://ec2-54-179-63-242.ap-southeast-1.compute.amazonaws.com',
 ];
 
 async function bootstrap() {
