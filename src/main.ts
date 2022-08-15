@@ -10,6 +10,7 @@ const whitelist = [
   'http://localhost:5000',
   'https://ecommerce-fe-inky.vercel.app',
   'http://ec2-54-179-63-242.ap-southeast-1.compute.amazonaws.com',
+  'https://techlens.herokuapp.com',
 ];
 
 async function bootstrap() {
@@ -39,7 +40,7 @@ async function bootstrap() {
   //   });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
   logger.log(`Application listening at ${await app.getUrl()}`);
 }
 bootstrap();
