@@ -1,10 +1,10 @@
 {
   "type": "postgres",
-  "host": "localhost",
+  "host": "ec2-52-204-157-26.compute-1.amazonaws.com",
   "port": 5432,
-  "username": "postgres",
-  "password": "postgres",
-  "database": "techlens",
+  "username": "hqnyjhthpspyws",
+  "password": "10630681a2d37b38a4d0f188cc4e4bbd68839e918f8b4a2fb5c2fbe290e6acb1",
+  "database": "d9moh8f5mputmb",
   "synchronize": true,
   "logging": true,
   "subscribers": [],
@@ -12,5 +12,10 @@
   "cli": {
     "migrationsDir": "src/database/migrations"
   },
-  "entities": ["dist/**/*.entity.{ts,js}"]
+  "entities": ["dist/**/*.entity.{ts,js}"],
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  }
 }
