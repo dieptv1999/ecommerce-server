@@ -29,6 +29,8 @@ import { memoryStorage } from 'multer';
 import { HomepageModule } from './homepage/homepage.module';
 import { ParcelModule } from './parcel/parcel.module';
 import { OrderModule } from './order/order.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -50,11 +52,13 @@ import { OrderModule } from './order/order.module';
     ProductModule,
     SkuModule,
     HomepageModule,
+    PostModule,
     MulterModule.register({
       storage: memoryStorage(),
     }),
     ParcelModule,
     OrderModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController, SkuController],
   providers: [AppService, Logger, SkuService],
