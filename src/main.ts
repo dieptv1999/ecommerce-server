@@ -11,6 +11,7 @@ const whitelist = [
   'https://ecommerce-fe-inky.vercel.app',
   'http://ec2-54-179-63-242.ap-southeast-1.compute.amazonaws.com',
   'https://techlens.herokuapp.com',
+  'https://admin.techlens.tech',
 ];
 
 async function bootstrap() {
