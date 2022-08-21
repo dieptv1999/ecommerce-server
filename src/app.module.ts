@@ -33,6 +33,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { PostModule } from './post/post.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -63,6 +64,10 @@ import { join } from 'path';
     ScheduleModule.forRoot(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
+    }),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
     }),
   ],
   controllers: [AppController, SkuController],
