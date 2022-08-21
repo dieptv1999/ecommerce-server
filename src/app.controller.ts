@@ -21,8 +21,10 @@ export class AppController {
   }
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('files'))
-  uploadImage(@UploadedFile(SharpPipe) image: string) {
+  @UseInterceptors(FileInterceptor('image'))
+  uploadImage(@UploadedFile(SharpPipe) image: string): string {
     console.log(image, 'image');
+    // this.appService.uploadImage(image);
+    return image;
   }
 }

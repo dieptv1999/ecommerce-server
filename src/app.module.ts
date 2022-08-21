@@ -31,6 +31,8 @@ import { ParcelModule } from './parcel/parcel.module';
 import { OrderModule } from './order/order.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PostModule } from './post/post.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -59,6 +61,9 @@ import { PostModule } from './post/post.module';
     ParcelModule,
     OrderModule,
     ScheduleModule.forRoot(),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+    }),
   ],
   controllers: [AppController, SkuController],
   providers: [AppService, Logger, SkuService],

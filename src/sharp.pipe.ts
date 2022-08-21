@@ -8,11 +8,11 @@ export class SharpPipe
 {
   async transform(image: Express.Multer.File): Promise<string> {
     const originalName = path.parse(image.originalname).name;
-    const filename = Date.now() + '-' + originalName + '.webp';
+    const filename = Date.now() + '-' + originalName + '.png';
 
     await sharp(image.buffer)
       .resize(800)
-      .webp({ effort: 3 })
+      .png({ effort: 3 })
       .toFile(path.join('uploads', filename));
 
     return filename;
