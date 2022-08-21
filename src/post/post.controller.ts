@@ -4,7 +4,7 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put, Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -25,15 +25,22 @@ export class PostController {
     return this.postService.create(payload);
   }
 
-  @Get(':id')
-  @UseGuards(JwtAuthGuard)
-  get(@Param() params: { id: number }) {
-    return this.postService.findOne(params?.id);
+  @Get('list-id')
+  // @UseGuards(JwtAuthGuard)
+  getIds() {
+    return this.postService.ids();
   }
 
-  @Get('')
-  @UseGuards(JwtAuthGuard)
-  list(@Param() params) {
+  @Get('list')
+  // @UseGuards(JwtAuthGuard)
+  list(@Query() params: { start: number; limit: number }) {
+    console.log(params, 'params');
+    return this.postService.find(params);
+  }
+
+  @Get(':id')
+  // @UseGuards(JwtAuthGuard)
+  get(@Param() params: { id: number }) {
     return this.postService.findOne(params?.id);
   }
 

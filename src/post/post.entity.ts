@@ -34,7 +34,7 @@ export class Post {
   background: string;
 
   @Field()
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: '' })
   thumbnail: string;
 
   @Field()
