@@ -7,9 +7,6 @@ import * as cookieParser from 'cookie-parser';
 const whitelist = [
   'http://localhost:3000',
   'http://localhost:3001',
-  'http://localhost:5000',
-  'https://ecommerce-fe-inky.vercel.app',
-  'http://ec2-54-179-63-242.ap-southeast-1.compute.amazonaws.com',
   'https://techlens.herokuapp.com',
   'https://admin.techlens.tech',
 ];
