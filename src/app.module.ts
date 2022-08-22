@@ -64,10 +64,10 @@ import { Category } from './category/category.entity';
       password:
         '10630681a2d37b38a4d0f188cc4e4bbd68839e918f8b4a2fb5c2fbe290e6acb1',
       database: 'd9moh8f5mputmb',
-      synchronize: true,
-      // logging: true,
-      // subscribers: [],
-      // migrations: ['dist/src/database/migrations/*.js'],
+      synchronize: false,
+      logging: true,
+      subscribers: [],
+      migrations: ['dist/src/database/migrations/*.js'],
       // cli: {
       //   migrationsDir: 'src/database/migrations',
       // },
