@@ -34,6 +34,17 @@ import { PostModule } from './post/post.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { User } from './users/user.entity';
+import { Order } from './order/order.entity';
+import { Parcel } from './parcel/parcel.entity';
+import { Permission } from './permission/permission.entity';
+import { Post } from './post/post.entity';
+import { Product } from './product/product.entity';
+import { Role } from './role/role.entity';
+import { Sku } from './sku/sku.entity';
+import { Trademark } from './trademark/trademark.entity';
+import { CategoryModule } from './category/category.module';
+import { Category } from './category/category.entity';
 
 @Module({
   imports: [
@@ -45,7 +56,38 @@ import { ThrottlerModule } from '@nestjs/throttler';
       autoSchemaFile: 'schema.gql',
     }),
     TypeOrmModule.forRoot({
-      autoLoadEntities: true,
+      // autoLoadEntities: true,
+      type: 'postgres',
+      host: 'ec2-52-204-157-26.compute-1.amazonaws.com',
+      port: 5432,
+      username: 'hqnyjhthpspyws',
+      password:
+        '10630681a2d37b38a4d0f188cc4e4bbd68839e918f8b4a2fb5c2fbe290e6acb1',
+      database: 'd9moh8f5mputmb',
+      synchronize: true,
+      // logging: true,
+      // subscribers: [],
+      // migrations: ['dist/src/database/migrations/*.js'],
+      // cli: {
+      //   migrationsDir: 'src/database/migrations',
+      // },
+      entities: [
+        User,
+        Order,
+        Parcel,
+        Permission,
+        Post,
+        Product,
+        Role,
+        Sku,
+        Trademark,
+        Category,
+      ],
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
     }),
     AuthModule,
     UsersModule,
@@ -64,11 +106,13 @@ import { ThrottlerModule } from '@nestjs/throttler';
     ScheduleModule.forRoot(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
+      renderPath: '/public',
     }),
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 10,
     }),
+    CategoryModule,
   ],
   controllers: [AppController, SkuController],
   providers: [AppService, Logger, SkuService],

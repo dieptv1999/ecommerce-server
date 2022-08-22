@@ -13,12 +13,11 @@ import {
 } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { User } from '../users/user.entity';
-import { MinLength } from 'class-validator';
-import { Category } from '../category/category.entity';
+import { Post } from '../post/post.entity';
 
 @ObjectType()
 @Entity()
-export class Post {
+export class Category {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
@@ -29,7 +28,7 @@ export class Post {
   uuid: string;
 
   @Field()
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   name: string;
 
   @Field()
@@ -39,10 +38,6 @@ export class Post {
   @Field()
   @Column({ nullable: true, default: '' })
   thumbnail: string;
-
-  @Field()
-  @Column({ nullable: true })
-  avatar: string;
 
   @Field()
   @Column({ nullable: true })
@@ -57,18 +52,9 @@ export class Post {
   @Column({ nullable: false })
   description: string;
 
-  @Field()
-  @Column({ nullable: false, default: '' })
-  @MinLength(1000)
-  content: string;
-
-  @Field()
-  @Column({ nullable: true })
-  type: string;
-
-  @ManyToMany(() => Category)
+  @ManyToMany(() => Post)
   @JoinTable()
-  categories: Category[];
+  categories: Post[];
 
   @Field()
   @CreateDateColumn()

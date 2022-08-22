@@ -70,6 +70,30 @@ export class User {
   roles: Role[];
 
   @Field()
+  @Column({ nullable: true })
+  instagram: string;
+
+  @Field()
+  @Column({ nullable: true })
+  facebook: string;
+
+  @Field()
+  @Column({ nullable: true })
+  twitter: string;
+
+  @Field()
+  @Column({ nullable: true })
+  linkedin: string;
+
+  @Field()
+  @Column({ nullable: true })
+  youtube: string;
+
+  @Field()
+  @Column({ nullable: true })
+  tiktok: string;
+
+  @Field()
   @CreateDateColumn()
   created_at: Date;
 

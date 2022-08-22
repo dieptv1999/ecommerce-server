@@ -40,6 +40,12 @@ type User {
   isActive: Boolean!
   blocked: Boolean!
   roles: [Role!]
+  instagram: String!
+  facebook: String!
+  twitter: String!
+  linkedin: String!
+  youtube: String!
+  tiktok: String!
   created_at: DateTime!
   updated_at: DateTime!
 }

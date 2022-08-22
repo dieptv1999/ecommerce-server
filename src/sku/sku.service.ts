@@ -41,7 +41,7 @@ export class SkuService {
   }
 
   async getByUUID(uuid: number): Promise<Sku> {
-    return await this.skuRepository.findOne({ where: { uuid } });
+    return await this.skuRepository.findOne({ where: { uuid: `${uuid}` } });
   }
 
   async filter(payloads: FilterQueryDto): Promise<[Sku[], number]> {
