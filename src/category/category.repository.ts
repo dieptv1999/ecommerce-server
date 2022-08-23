@@ -1,8 +1,9 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Category } from './category.entity';
 import { CategoryCreateDto } from './category-create.dto';
+import { Injectable } from '@nestjs/common';
 
-@EntityRepository(Category)
+@Injectable()
 export class CategoryRepository extends Repository<Category> {
   createCategory(categoryCreateDto: CategoryCreateDto): Promise<Category> {
     const cate = this.create();

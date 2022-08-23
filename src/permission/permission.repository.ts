@@ -1,9 +1,14 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { DataSource, EntityRepository, Repository } from 'typeorm';
 import { Permission } from './permission.entity';
 import { PermissionDto } from './permission.dto';
+import { Injectable } from '@nestjs/common';
 
-@EntityRepository(Permission)
+@Injectable()
 export class PermissionRepository extends Repository<Permission> {
+  constructor(private dataSource: DataSource) {
+    super(Permission, dataSource.createEntityManager());
+  }
+
   createRole(permissionDto: PermissionDto): Promise<Permission> {
     const role = this.create();
 

@@ -1,9 +1,14 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { DataSource, EntityRepository, Repository } from 'typeorm';
 import { RoleDto } from './role.dto';
 import { Role } from './role.entity';
+import { Injectable } from '@nestjs/common';
 
-@EntityRepository(Role)
+@Injectable()
 export class RoleRepository extends Repository<Role> {
+  constructor(private dataSource: DataSource) {
+    super(Role, dataSource.createEntityManager());
+  }
+
   createRole(roleDto: RoleDto): Promise<Role> {
     const role = this.create();
 

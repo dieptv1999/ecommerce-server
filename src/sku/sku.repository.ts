@@ -1,9 +1,15 @@
-import { EntityRepository, Repository } from 'typeorm';
+import {DataSource, EntityRepository, Repository} from 'typeorm';
 import { Sku } from './sku.entity';
 import { SkuCreateDto } from './sku.dto';
+import { Injectable } from '@nestjs/common';
+import {Trademark} from "../trademark/trademark.entity";
 
-@EntityRepository(Sku)
+@Injectable()
 export class SkuRepository extends Repository<Sku> {
+  constructor(private dataSource: DataSource) {
+    super(Sku, dataSource.createEntityManager());
+  }
+
   createSku(skuCreateDto: SkuCreateDto): Promise<Sku> {
     const skuEntity = this.create();
 

@@ -1,9 +1,14 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { DataSource, EntityRepository, Repository } from 'typeorm';
 import { Post } from './post.entity';
 import { PostCreateDto } from './post-create.dto';
+import { Injectable } from '@nestjs/common';
 
-@EntityRepository(Post)
+@Injectable()
 export class PostRepository extends Repository<Post> {
+  constructor(private dataSource: DataSource) {
+    super(Post, dataSource.createEntityManager());
+  }
+
   createPost(postCreateDto: PostCreateDto): Promise<Post> {
     const post = this.create();
 

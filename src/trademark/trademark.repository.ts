@@ -1,9 +1,14 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { DataSource, EntityRepository, Repository } from 'typeorm';
 import { Trademark } from './trademark.entity';
 import { TrademarkDto } from './trademark.dto';
+import { Injectable } from '@nestjs/common';
 
-@EntityRepository(Trademark)
+@Injectable()
 export class TrademarkRepository extends Repository<Trademark> {
+  constructor(private dataSource: DataSource) {
+    super(Trademark, dataSource.createEntityManager());
+  }
+
   createTrademark(trademarkDto: TrademarkDto): Promise<Trademark> {
     const role = this.create();
 

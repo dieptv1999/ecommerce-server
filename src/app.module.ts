@@ -49,27 +49,27 @@ import { Category } from './category/category.entity';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      debug: true,
-      playground: false,
-      autoSchemaFile: 'schema.gql',
-    }),
+    // GraphQLModule.forRoot<ApolloDriverConfig>({
+    //   driver: ApolloDriver,
+    //   debug: true,
+    //   playground: false,
+    //   autoSchemaFile: 'schema.gql',
+    // }),
     TypeOrmModule.forRoot({
-      // autoLoadEntities: true,
+      autoLoadEntities: true,
       type: 'postgres',
       host: 'database-1.cihn7rugxfxc.ap-southeast-1.rds.amazonaws.com',
       port: 5432,
       username: 'postgres',
       password: 'dieptv1999',
       database: 'postgres',
-      synchronize: false,
-      logging: true,
-      subscribers: [],
-      migrations: ['dist/src/database/migrations/*.js'],
-      // cli: {
-      //   migrationsDir: 'src/database/migrations',
-      // },
+      synchronize: true,
+      // logging: true,
+      // subscribers: [],
+      // migrations: ['dist/src/database/migrations/*.js'],
+      // // cli: {
+      // //   migrationsDir: 'src/database/migrations',
+      // // },
       entities: [
         User,
         Order,
