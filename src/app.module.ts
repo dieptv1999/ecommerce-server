@@ -58,12 +58,11 @@ import { Category } from './category/category.entity';
     TypeOrmModule.forRoot({
       // autoLoadEntities: true,
       type: 'postgres',
-      host: 'ec2-52-204-157-26.compute-1.amazonaws.com',
+      host: 'database-1.cihn7rugxfxc.ap-southeast-1.rds.amazonaws.com',
       port: 5432,
-      username: 'hqnyjhthpspyws',
-      password:
-        '10630681a2d37b38a4d0f188cc4e4bbd68839e918f8b4a2fb5c2fbe290e6acb1',
-      database: 'd9moh8f5mputmb',
+      username: 'postgres',
+      password: 'dieptv1999',
+      database: 'postgres',
       synchronize: false,
       logging: true,
       subscribers: [],
