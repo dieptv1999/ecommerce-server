@@ -27,7 +27,6 @@ export class CategoryCreateDto {
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
   userId: number;
 
   @ApiProperty()

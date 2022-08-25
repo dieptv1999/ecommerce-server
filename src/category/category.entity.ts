@@ -54,7 +54,7 @@ export class Category {
 
   @ManyToMany(() => Post)
   @JoinTable()
-  categories: Post[];
+  posts: Post[];
 
   @Field()
   @CreateDateColumn()

@@ -7,6 +7,7 @@ import {
   Put,
   Query,
   Req,
+  Request,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -22,8 +23,12 @@ export class CategoryController {
 
   @Post('create')
   @UseGuards(JwtAuthGuard)
-  create(@Body() payload: CategoryCreateDto) {
-    return this.categoryService.create(payload);
+  create(@Request() req, @Body() payload: CategoryCreateDto) {
+    console.log(payload, req.user, 'params');
+    return this.categoryService.create({
+      ...payload,
+      userId: req.user.id,
+    });
   }
 
   @Get('list-id')
@@ -35,7 +40,6 @@ export class CategoryController {
   @Get('list')
   // @UseGuards(JwtAuthGuard)
   list(@Query() params: { start: number; limit: number }) {
-    console.log(params, 'params');
     return this.categoryService.find(params);
   }
 
